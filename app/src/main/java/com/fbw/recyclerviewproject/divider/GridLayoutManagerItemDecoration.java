@@ -11,11 +11,8 @@ import android.view.View;
 import com.fbw.recyclerviewproject.R;
 
 /**
- * 作者：fbw
- * 邮箱：kent.fang@hotmail.com
- * RecyclerView，网格布局的item分割线
+ * 实现网格布局的item分割线
  */
-
 public class GridLayoutManagerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable divider;

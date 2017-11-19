@@ -14,7 +14,7 @@ import com.fbw.recyclerviewproject.simple.SimpleAdapter;
 
 /**
  * RecyclerView用法总结：
- * 2，绘制item的分割线 RecyclerView.ItemDecoration 的使用
+ * 2，线性RecyclerView 绘制item的分割线 RecyclerView.ItemDecoration 的使用
  */
 public class LinearLayoutItemDecorationActivity extends AppCompatActivity {
 

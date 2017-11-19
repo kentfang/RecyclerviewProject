@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 作者：fbw
- * 邮箱：kent.fang@hotmail.com
- */
-
-/**
  * RecyclerView.Adapter 封装了很多刷新数据的方法
  */
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleViewHold> {
@@ -32,7 +27,6 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleViewHold> {
     public int getItemCount() {
         return datas.size();
     }
-
     /**
      * 设置数据
      * @param datas

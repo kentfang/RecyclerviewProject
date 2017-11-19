@@ -6,10 +6,6 @@ import android.widget.TextView;
 
 import com.fbw.recyclerviewproject.R;
 
-/**
- * 作者：fbw
- * 邮箱：kent.fang@hotmail.com
- */
 
 public class SimpleViewHold extends RecyclerView.ViewHolder {
     public TextView tv;

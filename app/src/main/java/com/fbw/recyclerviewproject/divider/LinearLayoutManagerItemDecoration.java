@@ -12,8 +12,6 @@ import android.view.View;
 import com.fbw.recyclerviewproject.R;
 
 /**
- * 作者：fbw
- * 邮箱：kent.fang@hotmail.com
  * RecyclerView,线性显示item的下划线
  */
 
@@ -34,7 +32,7 @@ public class LinearLayoutManagerItemDecoration extends RecyclerView.ItemDecorati
     private Drawable divider;
 
     /**
-     * 这是系统的divider
+     * 这是系统或者主题中设定的divider
      */
     private int [] attrs = new int[]{
             android.R.attr.listDivider

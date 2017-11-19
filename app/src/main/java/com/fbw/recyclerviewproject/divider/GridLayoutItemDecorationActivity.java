@@ -11,6 +11,10 @@ import com.fbw.recyclerviewproject.DataUtil;
 import com.fbw.recyclerviewproject.R;
 import com.fbw.recyclerviewproject.simple.SimpleAdapter;
 
+/**
+ * RecyclerView用法总结：
+ * 3，网格RecyclerView 绘制item的分割线 RecyclerView.ItemDecoration 的使用
+ */
 public class GridLayoutItemDecorationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

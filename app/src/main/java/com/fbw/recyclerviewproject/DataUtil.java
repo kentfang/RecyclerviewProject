@@ -3,11 +3,6 @@ package com.fbw.recyclerviewproject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 作者：fbw
- * 邮箱：kent.fang@hotmail.com
- */
-
 public class DataUtil {
 
     public static List<String> getSimpleData(){
