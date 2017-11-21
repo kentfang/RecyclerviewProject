@@ -3,6 +3,7 @@ package com.fbw.recyclerviewproject.itemhelp;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.ViewDebug;
 
 import com.fbw.recyclerviewproject.R;
@@ -100,9 +101,7 @@ public class ItemHelpCallBack extends ItemTouchHelper.Callback {
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(android.R.color.white));
-
-        //修复左右滑动删除item之后，出现有不显示的item的bug,主要原因是 因为RecyclerView的view复用,
-        //因为在onChildDraw中 对view的属性进行了改变，需要在结束的时候，重新对属性重新恢复到原来的状态
+        //在onChildDraw中 itemview的属性发生了改变，需要重新设定，不然RecyclerView的view 复用，就会导致部分item显示不出来
         viewHolder.itemView.setAlpha(1);
         viewHolder.itemView.setScaleX(1);
         viewHolder.itemView.setScaleY(1);
@@ -125,20 +124,13 @@ public class ItemHelpCallBack extends ItemTouchHelper.Callback {
      */
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        int d =0;
         if(actionState == ACTION_STATE_SWIPE){
             //d 是需要从1到0
-            d = (int) (1 - Math.abs(dX)/viewHolder.itemView.getWidth());
+            float d = (float) (1 - Math.abs(dX)/viewHolder.itemView.getWidth());
             viewHolder.itemView.setAlpha(d);
             viewHolder.itemView.setScaleX(d);
             viewHolder.itemView.setScaleY(d);
         }
-        //修复左右滑动删除item之后，出现有不显示的item的bug
-//        if(d == 0){
-//            viewHolder.itemView.setAlpha(1);
-//            viewHolder.itemView.setScaleX(1);
-//            viewHolder.itemView.setScaleY(1);
-//        }
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 }
