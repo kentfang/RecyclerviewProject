@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.fbw.recyclerviewproject.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleViewHold> {
 
     @Override
     public void onBindViewHolder(SimpleViewHold holder, int position) {
+        holder.itemView.setBackgroundResource(R.color.colorAccent);
         holder.tv.setText(datas.get(position));
     }
     @Override

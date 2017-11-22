@@ -26,7 +26,10 @@ public class GridLayoutItemDecorationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_divider);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        recyclerView.addItemDecoration(new GridLayoutManagerItemDecoration(this));
+        SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration();
+        spaceItemDecoration.setSpace(20);
+        recyclerView.addItemDecoration(spaceItemDecoration);
+//        recyclerView.addItemDecoration(new GridLayoutManagerItemDecoration(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new SimpleAdapter();
         recyclerView.setAdapter(adapter);
