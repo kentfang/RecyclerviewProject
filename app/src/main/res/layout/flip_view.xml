@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <com.fbw.recyclerviewproject.card.FlipView
+        android:id="@+id/flip_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <linearlayout
+            android:id="@+id/root_ll1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <textview
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:text="one">
+            </textview>
+        </linearlayout>
+
+        <linearlayout
+            android:id="@+id/root_ll2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <textview
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:text="two">
+            </textview>
+        </linearlayout>
+    </com.fbw.recyclerviewproject.card.FlipView>
+
+
+</LinearLayout>
