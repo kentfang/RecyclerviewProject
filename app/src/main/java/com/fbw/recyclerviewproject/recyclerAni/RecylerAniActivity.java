@@ -12,7 +12,6 @@ import com.fbw.recyclerviewproject.R;
 import com.fbw.recyclerviewproject.simple.SimpleAdapter;
 
 public class RecylerAniActivity extends AppCompatActivity implements View.OnClickListener {
-
     private RecyclerView recyclerView;
     private ItemAniAdapter aniAdapter;
     @Override
@@ -28,7 +27,6 @@ public class RecylerAniActivity extends AppCompatActivity implements View.OnClic
         recyclerView.setItemAnimator(new RecylerItemAni());
         aniAdapter.setDatas(DataUtil.getItemEntuty());
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
