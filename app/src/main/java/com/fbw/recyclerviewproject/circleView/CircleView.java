@@ -28,10 +28,7 @@ public class CircleView extends View {
     private int outsideColor;    //进度的颜色
     private float outsideRadius;    //外圆半径大小
     private int insideColor;    //背景颜色
-    private int progressTextColor;   //圆环内文字颜色
-    private float progressTextSize;    //圆环内文字大小
     private float progressWidth;    //圆环的宽度
-    private int maxProgress;    //最大进度
     private float progress;    //当前进度
     private int direction;    //进度从哪里开始(设置了4个值,上左下右)
 
@@ -40,10 +37,14 @@ public class CircleView extends View {
     private TimeInterpolator value;
 
     private Paint paint;
-    private String progressText;     //圆环内文字
-    private Rect rect;
 
     private ValueAnimator animator;
+
+    public void setProgressCallBack(OnCircleViewProgressCallBack progressCallBack) {
+        this.progressCallBack = progressCallBack;
+    }
+
+    private OnCircleViewProgressCallBack progressCallBack;
 
     enum DirectionEnum {
         LEFT(0, 180.0f),
@@ -88,7 +89,6 @@ public class CircleView extends View {
             return enumObject.getDegree();
         }
     }
-
     public CircleView(Context context) {
         this(context, null);
     }
@@ -103,18 +103,13 @@ public class CircleView extends View {
         outsideColor = a.getColor(R.styleable.CircleView_outside_color, ContextCompat.getColor(getContext(), R.color.colorPrimary));
         outsideRadius = a.getDimension(R.styleable.CircleView_outside_radius,60);
         insideColor = a.getColor(R.styleable.CircleView_inside_color, ContextCompat.getColor(getContext(), android.R.color.holo_blue_light));
-        progressTextColor = a.getColor(R.styleable.CircleView_progress_text_color, ContextCompat.getColor(getContext(), R.color.colorPrimary));
-        progressTextSize = a.getDimension(R.styleable.CircleView_progress_text_size, 14);
         progressWidth = a.getDimension(R.styleable.CircleView_progress_width, 10);
         progress = a.getFloat(R.styleable.CircleView_progress, 50.0f);
-        maxProgress = a.getInt(R.styleable.CircleView_max_progress, 100);
         direction = a.getInt(R.styleable.CircleView_direction, 3);
         duration =a.getInt(R.styleable.CircleView_duration, 200);
         a.recycle();
-
         paint = new Paint();
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -125,24 +120,11 @@ public class CircleView extends View {
         paint.setStrokeWidth(progressWidth); //设置圆的宽度
         paint.setAntiAlias(true);  //消除锯齿
         canvas.drawCircle(circlePoint, circlePoint, outsideRadius, paint); //画出圆
-
         //第二步:画进度(圆弧)
         paint.setColor(outsideColor);  //设置进度的颜色
         RectF oval = new RectF(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);  //用于定义的圆弧的形状和大小的界限
-        canvas.drawArc(oval, DirectionEnum.getDegree(direction), 360 * (progress / maxProgress), false, paint);  //根据进度画圆弧
-
-        //第三步:画圆环内百分比文字
-        rect = new Rect();
-        paint.setColor(progressTextColor);
-        paint.setTextSize(progressTextSize);
-        paint.setStrokeWidth(0);
-        progressText = getProgressText();
-        paint.getTextBounds(progressText, 0, progressText.length(), rect);
-        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-        int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;  //获得文字的基准线
-        canvas.drawText(progressText, getMeasuredWidth() / 2 - rect.width() / 2, baseline, paint);
+        canvas.drawArc(oval, DirectionEnum.getDegree(direction), 360 * (progress / 100), false, paint);  //根据进度画圆弧
     }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width;
@@ -164,93 +146,16 @@ public class CircleView extends View {
         }
         setMeasuredDimension(width, height);
     }
-
-    //中间的进度百分比
-    private String getProgressText() {
-        return (int) ((progress / maxProgress) * 100) + "%";
-    }
-
-    public int getOutsideColor() {
-        return outsideColor;
-    }
-
-    public void setOutsideColor(int outsideColor) {
-        this.outsideColor = outsideColor;
-    }
-
-    public float getOutsideRadius() {
-        return outsideRadius;
-    }
-
-    public void setOutsideRadius(float outsideRadius) {
-        this.outsideRadius = outsideRadius;
-    }
-
-    public int getInsideColor() {
-        return insideColor;
-    }
-
-    public void setInsideColor(int insideColor) {
-        this.insideColor = insideColor;
-    }
-
-    public int getProgressTextColor() {
-        return progressTextColor;
-    }
-
-    public void setProgressTextColor(int progressTextColor) {
-        this.progressTextColor = progressTextColor;
-    }
-
-    public float getProgressTextSize() {
-        return progressTextSize;
-    }
-
-    public void setProgressTextSize(float progressTextSize) {
-        this.progressTextSize = progressTextSize;
-    }
-
-    public float getProgressWidth() {
-        return progressWidth;
-    }
-
-    public void setProgressWidth(float progressWidth) {
-        this.progressWidth = progressWidth;
-    }
-
-    public synchronized int getMaxProgress() {
-        return maxProgress;
-    }
-
-    public synchronized void setMaxProgress(int maxProgress) {
-        if (maxProgress < 0) {
-            //此为传递非法参数异常
-            throw new IllegalArgumentException("maxProgress should not be less than 0");
-        }
-        this.maxProgress = maxProgress;
-    }
-
-    public synchronized float getProgress() {
-        return progress;
-    }
-
-    //加锁保证线程安全,能在线程中使用
-    public synchronized void setProgress(int progress) {
-        if (progress < 0) {
-            throw new IllegalArgumentException("progress should not be less than 0");
-        }
-        if (progress > maxProgress) {
-            progress = maxProgress;
-        }
-        startAnim(progress);
-    }
-    private void startAnim(float startProgress) {
+    private synchronized void startAnim(float startProgress) {
         animator = ObjectAnimator.ofFloat(0, startProgress);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 CircleView.this.progress = (float) animation.getAnimatedValue();
                 postInvalidate();
+                if (progressCallBack!=null){
+                    progressCallBack.onCircleViewProgress( CircleView.this.progress);
+                }
             }
         });
         animator.setDuration(duration);
@@ -258,8 +163,13 @@ public class CircleView extends View {
         animator.start();
     }
 
+
+    interface OnCircleViewProgressCallBack{
+        void onCircleViewProgress(float progress);
+    }
+
     public void start(){
-        setProgress(100);
+        startAnim(100);
     }
     public void setInterpolator(TimeInterpolator value){
         this.value = value;

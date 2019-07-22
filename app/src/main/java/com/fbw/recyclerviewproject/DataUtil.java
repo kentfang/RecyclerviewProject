@@ -25,4 +25,12 @@ public class DataUtil {
         }
         return datas;
     }
+
+    public static List<String> getItemShakeData(){
+        List<String> datas = new ArrayList<>();
+        for (int i = 0; i < 1; i++){
+            datas.add("测试数据" + i);
+        }
+        return datas;
+    }
 }

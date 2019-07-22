@@ -7,14 +7,19 @@
     android:orientation="vertical"
     tools:context=".circleView.CircleViewActivity">
 
+    <Button
+        android:id="@+id/start"
+        android:text="开始"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
     <com.fbw.recyclerviewproject.circleView.CircleView
         android:id="@+id/am_progressbar_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:direction="left"
-        app:max_progress="100"
+        app:direction="top"
         app:outside_color="@color/colorPrimary"
         app:outside_radius="40dp"
         app:progress="0"
+        app:duration="2000"
         app:progress_width="2dp" />
 </LinearLayout>
