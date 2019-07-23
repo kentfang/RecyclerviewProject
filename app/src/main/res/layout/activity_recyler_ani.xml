@@ -8,7 +8,7 @@
     tools:context=".recyclerAni.RecylerAniActivity">
     <Button
         android:id="@+id/add"
-        android:text="添加"
+        android:text="重新添加"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
     <Button

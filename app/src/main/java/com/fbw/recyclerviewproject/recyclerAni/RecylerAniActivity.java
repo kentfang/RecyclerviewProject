@@ -33,6 +33,9 @@ public class RecylerAniActivity extends AppCompatActivity implements View.OnClic
             case R.id.remove:
                 aniAdapter.remove(2,3);
                 break;
+            case R.id.add:
+                aniAdapter.setDatas(DataUtil.getItemEntuty());
+                break;
         }
     }
 }

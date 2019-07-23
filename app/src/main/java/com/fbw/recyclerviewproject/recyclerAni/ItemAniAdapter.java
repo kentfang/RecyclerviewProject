@@ -12,6 +12,7 @@ import com.fbw.recyclerviewproject.itemhelp.ItemEntity;
 import com.fbw.recyclerviewproject.itemhelp.ItemHelpViewHold;
 import com.fbw.recyclerviewproject.itemhelp.ItemMoveListner;
 import com.fbw.recyclerviewproject.itemhelp.StartDragListner;
+import com.fbw.recyclerviewproject.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +46,8 @@ public class ItemAniAdapter extends RecyclerView.Adapter<ItemHelpViewHold> {
         }else{
             holder.iv.setBackgroundResource(R.mipmap.thr);
         }
+
+        LogUtil.d("fbw","position:"+position);
     }
     @Override
     public int getItemCount() {
