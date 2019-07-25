@@ -36,16 +36,16 @@ public class AniMainActivity extends Activity implements OnClickListener {
 
 	public void onClick(final View v) {
 		copy(v);
-//		final int[] location = new int[2];
-//		v.getLocationOnScreen(location);
-//		int x = location[0];
-//		int y = location[1];
-//		AnimatorPath path = new AnimatorPath();
-//		path.moveTo(0f,0f);
-//		path.curveTo(0f, 0f, (endx-x)/2f,endy-y-100,endx-x ,endy-y );
-//		ObjectAnimator ani = ObjectAnimator.ofObject(this, "hehe", evaluator, path.getPoints().toArray());
-//		ani.setDuration(1000);
-//		ani.start();
+		final int[] location = new int[2];
+		v.getLocationOnScreen(location);
+		int x = location[0];
+		int y = location[1];
+		AnimatorPath path = new AnimatorPath();
+		path.moveTo(0f,0f);
+		path.curveTo(0f, 0f, (endx-x)/2f,endy-y-100,endx-x ,endy-y );
+		ObjectAnimator ani = ObjectAnimator.ofObject(this, "hehe", evaluator, path.getPoints().toArray());
+		ani.setDuration(1000);
+		ani.start();
 	}
 
 	public void setHehe(Viewpoint point){

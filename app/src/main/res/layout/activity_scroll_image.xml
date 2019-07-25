@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scrollImage.ScrollImageActivity">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imageview"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp" />-->
+    <com.fbw.recyclerviewproject.scrollImage.ScrollImageView
+        android:layout_centerInParent="true"
+        android:id="@+id/ScrollImageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        />
+
+    <!--<com.fbw.recyclerviewproject.RotateView-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:id="@+id/ScrollImageView"-->
+    <!--android:layout_width="300dp"-->
+    <!--android:layout_height="300dp"-->
+        <!--&gt;</com.fbw.recyclerviewproject.RotateView>-->
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:id="@+id/click"/>-->
+</RelativeLayout>

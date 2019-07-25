@@ -1,4 +1,4 @@
-package com.fbw.recyclerviewproject.stereoView;
+package com.fbw.recyclerviewproject.scrollImage;
 
 import android.content.Context;
 import android.graphics.Camera;
@@ -12,8 +12,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
-
-import com.fbw.recyclerviewproject.utils.LogUtil;
 
 
 /**
@@ -161,7 +159,6 @@ public class StereoView extends ViewGroup {
                     isSliding = false;
                     mVelocityTracker.computeCurrentVelocity(1000);
                     float yVelocity = mVelocityTracker.getYVelocity();
-                    LogUtil.d("fbw","yVelocity:"+yVelocity);
                     //滑动的速度大于规定的速度，或者向上滑动时，上一页页面展现出的高度超过1/2。则设定状态为State.ToPre
                     if (yVelocity > standerSpeed || ((getScrollY() + mHeight / 2) / mHeight < mStartScreen)) {
                         mState = State.ToPre;
@@ -267,7 +264,6 @@ public class StereoView extends ViewGroup {
         startY = getScrollY() - mHeight;
         setScrollY(startY);
         delta = mHeight * mStartScreen - startY + (addCount - 1) * mHeight;
-        LogUtil.m("多后一页startY " + startY + " yVelocity " + yVelocity + " delta " + delta + "  getScrollY() " + getScrollY() + " addCount " + addCount);
         duration = (Math.abs(delta)) * 3;
         mScroller.startScroll(0, startY, 0, delta, duration);
         addCount--;
@@ -471,10 +467,8 @@ public class StereoView extends ViewGroup {
      */
     public StereoView setItem(int itemId) {
 
-        LogUtil.m("之前curScreen " + mCurScreen);
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
-            LogUtil.m("强制完成");
         }
         if (itemId < 0 || itemId > (getChildCount() - 1)) {
             throw new IndexOutOfBoundsException("请输入规定范围内item位置号");
@@ -487,7 +481,6 @@ public class StereoView extends ViewGroup {
             //setScrollY(mStartScreen * mHeight);
             toPreAction(standerSpeed + (mCurScreen - itemId - 1) * flingSpeed);
         }
-        LogUtil.m("之后curScreen " + mCurScreen + " getScrollY " + getScrollY());
         return this;
     }
 
@@ -499,7 +492,6 @@ public class StereoView extends ViewGroup {
     public StereoView toPre() {
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
-            LogUtil.m("强制完成");
         }
         toPreAction(standerSpeed);
         return this;
@@ -513,7 +505,6 @@ public class StereoView extends ViewGroup {
     public StereoView toNext() {
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
-            LogUtil.m("强制完成");
         }
         toNextAction(-standerSpeed);
         return this;
