@@ -5,12 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".scrollImage.ScrollImageActivity">
 
+
+    <TextView
+        android:id="@+id/degreeShow"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text=""/>
     <!--<ImageView-->
         <!--android:id="@+id/imageview"-->
         <!--android:layout_centerInParent="true"-->
         <!--android:layout_width="300dp"-->
         <!--android:layout_height="300dp" />-->
-    <com.fbw.recyclerviewproject.scrollImage.ScrollImageView
+    <com.fbw.recyclerviewproject.scrollImage.ScrollImageView2
         android:layout_centerInParent="true"
         android:id="@+id/ScrollImageView"
         android:layout_width="300dp"
