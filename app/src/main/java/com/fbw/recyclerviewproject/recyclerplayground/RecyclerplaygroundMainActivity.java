@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,6 +23,16 @@ import com.fbw.recyclerviewproject.recyclerplayground.fragments.VerticalStaggere
 public class RecyclerplaygroundMainActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public RecyclerplaygroundMainActivity(){
+        Log.d("fbw","MainActivity");
+    }
+
+    @Override
+    public void startLockTask() {
+        Log.d("fbw","startLockTask");
+        super.startLockTask();
+    }
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -34,6 +45,7 @@ public class RecyclerplaygroundMainActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("fbw","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerplayground_activity_main);
 
