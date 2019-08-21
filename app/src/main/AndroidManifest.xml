@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fbw.recyclerviewproject">
 
+
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,16 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main2Activity"></activity>
-        <!-- <activity android:name=".scrollImage.ScrollImageActivity"></activity> -->
-        <!-- <activity android:name=".rotate3d.FlipAnimationActivity"></activity> -->
-        <!-- <activity android:name=".rotate3d.Roatate3dActivity"></activity> -->
-        <!-- <activity android:name=".circleView.CircleViewActivity"></activity> -->
-        <!-- <activity android:name=".SuperCircleView.SuperCircleViewActivity"></activity> -->
-        <!-- <activity android:name=".galanz.GalanzActivity" /> -->
+        <!--<activity android:name=".wifi.WifiActivity"></activity>-->
+        <activity android:name=".MyTransition.Transition2Activity" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name="com.fbw.recyclerviewproject.ripple.RippleActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
