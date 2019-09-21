@@ -1,5 +1,30 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Robin Chutaux
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package com.fbw.recyclerviewproject.ripple;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -13,7 +38,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
@@ -23,12 +47,21 @@ import android.widget.RelativeLayout;
 
 import com.fbw.recyclerviewproject.R;
 
+
+/**
+ * RippleView custom layout
+ *
+ * Custom Layout that allows to use Ripple UI pattern above API 21
+ *
+ * @author Chutaux Robin
+ * @version 2015.0512
+ */
 public class RippleView extends RelativeLayout {
 
     private int WIDTH;
     private int HEIGHT;
     private int frameRate = 10;
-    private int rippleDuration = 100;
+    private int rippleDuration = 400;
     private int rippleAlpha = 90;
     private Handler canvasHandler;
     private float radiusMax = 0;
@@ -72,7 +105,12 @@ public class RippleView extends RelativeLayout {
         init(context, attrs);
     }
 
-
+    /**
+     * Method that initializes all fields and sets listeners
+     *
+     * @param context Context used to create this view
+     * @param attrs Attribute used to initialize fields
+     */
     private void init(final Context context, final AttributeSet attrs) {
         if (isInEditMode())
             return;
@@ -161,14 +199,14 @@ public class RippleView extends RelativeLayout {
 
             paint.setColor(rippleColor);
 
-//            if (rippleType == 1) {
-//                if ((((float) timer * frameRate) / rippleDuration) > 0.6f)
-//                    paint.setAlpha((int) (rippleAlpha - ((rippleAlpha) * (((float) timerEmpty * frameRate) / (durationEmpty)))));
-//                else
-//                    paint.setAlpha(rippleAlpha);
-//            }
-//            else
-//                paint.setAlpha((int) (rippleAlpha - ((rippleAlpha) * (((float) timer * frameRate) / rippleDuration))));
+            if (rippleType == 1) {
+                if ((((float) timer * frameRate) / rippleDuration) > 0.6f)
+                    paint.setAlpha((int) (rippleAlpha - ((rippleAlpha) * (((float) timerEmpty * frameRate) / (durationEmpty)))));
+                else
+                    paint.setAlpha(rippleAlpha);
+            }
+            else
+                paint.setAlpha((int) (rippleAlpha - ((rippleAlpha) * (((float) timer * frameRate) / rippleDuration))));
 
             timer++;
         }
@@ -186,36 +224,47 @@ public class RippleView extends RelativeLayout {
         scaleAnimation.setRepeatCount(1);
     }
 
-
+    /**
+     * Launch Ripple animation for the current view with a MotionEvent
+     *
+     * @param event MotionEvent registered by the Ripple gesture listener
+     */
     public void animateRipple(MotionEvent event) {
         createAnimation(event.getX(), event.getY());
     }
 
-
+    /**
+     * Launch Ripple animation for the current view centered at x and y position
+     *
+     * @param x Horizontal position of the ripple center
+     * @param y Vertical position of the ripple center
+     */
     public void animateRipple(final float x, final float y) {
         createAnimation(x, y);
     }
 
-
+    /**
+     * Create Ripple animation centered at x, y
+     *
+     * @param x Horizontal position of the ripple center
+     * @param y Vertical position of the ripple center
+     */
     private void createAnimation(final float x, final float y) {
         if (this.isEnabled() && !animationRunning) {
             if (hasToZoom)
                 this.startAnimation(scaleAnimation);
-            radiusMax = Math.max((float)Math.sqrt(WIDTH*WIDTH+HEIGHT*HEIGHT/4), Math.max(WIDTH, HEIGHT));
-            if (rippleType == 0){
 
-            }else if (rippleType==1){
+            radiusMax = Math.max(WIDTH, HEIGHT);
+
+            if (rippleType != 2)
                 radiusMax /= 2;
-            }
+
             radiusMax -= ripplePadding;
 
             if (isCentered || rippleType == 1) {
                 this.x = getMeasuredWidth() / 2;
                 this.y = getMeasuredHeight() / 2;
-            } else if(rippleType==0){
-                this.x = getMeasuredWidth() / 2;
-                this.y = getMeasuredHeight();
-            }else {
+            } else {
                 this.x = x;
                 this.y = y;
             }
@@ -285,6 +334,8 @@ public class RippleView extends RelativeLayout {
      *
      * @param rippleColor New color resource
      */
+    @SuppressLint("SupportAnnotationUsage")
+    @ColorRes
 	public void setRippleColor(int rippleColor) {
 		this.rippleColor = getResources().getColor(rippleColor);
 	}
@@ -343,7 +394,11 @@ public class RippleView extends RelativeLayout {
         return hasToZoom;
     }
 
-
+    /**
+     * At the end of Ripple effect, the child views has to zoom
+     *
+     * @param hasToZoom Do the child views have to zoom ? default is False
+     */
     public void setZooming(Boolean hasToZoom)
     {
         this.hasToZoom = hasToZoom;
@@ -354,7 +409,11 @@ public class RippleView extends RelativeLayout {
         return zoomScale;
     }
 
-
+    /**
+     * Scale of the end animation
+     *
+     * @param zoomScale Value of scale animation, default is 1.03f
+     */
     public void setZoomScale(float zoomScale)
     {
         this.zoomScale = zoomScale;
@@ -365,7 +424,11 @@ public class RippleView extends RelativeLayout {
         return zoomDuration;
     }
 
-
+    /**
+     * Duration of the ending animation in ms
+     *
+     * @param zoomDuration Duration, default is 200ms
+     */
     public void setZoomDuration(int zoomDuration)
     {
         this.zoomDuration = zoomDuration;
@@ -376,7 +439,11 @@ public class RippleView extends RelativeLayout {
         return rippleDuration;
     }
 
-
+    /**
+     * Duration of the Ripple animation in ms
+     *
+     * @param rippleDuration Duration, default is 400ms
+     */
     public void setRippleDuration(int rippleDuration)
     {
         this.rippleDuration = rippleDuration;
@@ -387,7 +454,11 @@ public class RippleView extends RelativeLayout {
         return frameRate;
     }
 
-
+    /**
+     * Set framerate for Ripple animation
+     *
+     * @param frameRate New framerate value, default is 10
+     */
     public void setFrameRate(int frameRate)
     {
         this.frameRate = frameRate;
@@ -398,7 +469,11 @@ public class RippleView extends RelativeLayout {
         return rippleAlpha;
     }
 
-
+    /**
+     * Set alpha for ripple effect color
+     *
+     * @param rippleAlpha Alpha value between 0 and 255, default is 90
+     */
     public void setRippleAlpha(int rippleAlpha)
     {
         this.rippleAlpha = rippleAlpha;
@@ -408,7 +483,9 @@ public class RippleView extends RelativeLayout {
         this.onCompletionListener = listener;
     }
 
-
+    /**
+     * Defines a callback called at the end of the Ripple effect
+     */
     public interface OnRippleCompleteListener {
         void onComplete(RippleView rippleView);
     }

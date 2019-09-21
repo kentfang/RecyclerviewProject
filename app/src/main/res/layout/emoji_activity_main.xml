@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <ListView
+        android:id="@+id/lv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_msg_list_bg"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_weight="0"
+        android:background="@color/color_btn_border" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@color/color_control_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp" >
+
+        <Button
+            android:id="@+id/btn_emotions"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/selector_btn_emo"
+            android:onClick="onButtonClick"
+            android:text="表情"
+            android:textColor="@color/color_btn_text"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="@color/color_msg_text"
+            android:background="@drawable/shape_edittext"
+            android:onClick="onButtonClick"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/selector_btn_send"
+            android:onClick="onButtonClick"
+            android:text="发送"
+            android:textColor="@color/color_btn_text"
+            android:textSize="16sp" />
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_weight="0"
+        android:background="@color/color_btn_border" />
+
+    <GridView
+        android:id="@+id/gv_emotions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="6"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="14dp"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:background="@color/color_emotion_list" />
+
+</LinearLayout>

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.fbw.recyclerviewproject.R;
+import com.fbw.recyclerviewproject.utils.LogUtil;
 
 public class RippleActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -13,26 +14,17 @@ public class RippleActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ripple);
-
-        RippleView rippleView = findViewById(R.id.ripple_view);
-        rippleView.setOnClickListener(new View.OnClickListener()
-        {
+        RippleView2 rippleView = findViewById(R.id.ripple_view);
+        rippleView.setOnRippleCompleteListener(new RippleView2.OnRippleCompleteListener() {
             @Override
-            public void onClick(View v)
-            {
-                Log.e("fbw", "Click Rect !");
+            public void onComplete(RippleView2 rippleView) {
+                LogUtil.d("RippleView2","onComplete");
+            }
+            @Override
+            public void progress(RippleView2 rippleView, int time, int total) {
             }
         });
-        rippleView.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                Log.d("fbw", "Ripple completed");
-            }
-        });
-
-
     }
-
     @Override
     public void onClick(View v) {
 

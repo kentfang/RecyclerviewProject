@@ -50,6 +50,7 @@ public class RecyclerActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.add_all).setOnClickListener(this);
         findViewById(R.id.add_one).setOnClickListener(this);
         findViewById(R.id.sub_one).setOnClickListener(this);
+
     }
 
     public void addAll(View view) {

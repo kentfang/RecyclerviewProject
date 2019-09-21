@@ -24,7 +24,7 @@ public class RecyclerplaygroundMainActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     public RecyclerplaygroundMainActivity(){
-        Log.d("fbw","MainActivity");
+        Log.d("fbw","AutoPollMainActivity");
     }
 
     @Override

@@ -25,7 +25,7 @@ public class GridLayoutItemDecorationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_divider);
         recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration();
         spaceItemDecoration.setSpace(20);
         recyclerView.addItemDecoration(spaceItemDecoration);

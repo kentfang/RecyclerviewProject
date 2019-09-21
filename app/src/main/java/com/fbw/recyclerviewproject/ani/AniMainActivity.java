@@ -34,6 +34,7 @@ public class AniMainActivity extends Activity implements OnClickListener {
 	float endx = 400f;
 	float endy = 400f;
 
+	@Override
 	public void onClick(final View v) {
 		copy(v);
 		final int[] location = new int[2];
